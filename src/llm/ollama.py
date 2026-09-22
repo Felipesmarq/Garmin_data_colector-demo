@@ -1,14 +1,14 @@
 """Provedor `ollama` -- modelo rodando local, em container Docker (serviço
-`ollama` do docker-compose.yml da demo, perfil `llm`). Saída estruturada via
-`format` (JSON Schema), suportado pela API do Ollama desde a v0.5 -- mesma
-ideia do `response_schema` do Gemini, reaproveitando o schema Pydantic que
-já existe (PlanoSemanal/RevisaoCoerencia), sem duplicar regra nenhuma.
+`ollama` do docker-compose.yml da demo). Saída estruturada via `format`
+(JSON Schema), suportado pela API do Ollama desde a v0.5 -- mesma ideia do
+`response_schema` do Gemini, reaproveitando o schema Pydantic que já
+existe (PlanoSemanal/RevisaoCoerencia), sem duplicar regra nenhuma.
 
 Sem chave de API, sem custo -- mas um modelo pequeno rodando em CPU erra
 formato e coerência mais que o Gemini real, principalmente como revisor
-(revisar_coerencia). Ver docs/DEMO.md pra o que validar antes de confiar
-no resultado (ver memória "validar antes de confiar" -- teste contra os
-cenários de guardrail do seed, não só contra o feliz caminho)."""
+(revisar_coerencia). Ver README.md pra o que validar antes de confiar no
+resultado -- teste contra os quatro cenários de guardrail do seed
+(SEED_CENARIO), não só contra o feliz caminho."""
 
 import os
 
