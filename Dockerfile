@@ -15,4 +15,8 @@ RUN uv sync --frozen
 
 COPY . .
 
-CMD ["python", "explore/inspect_garmin.py"]
+# Demo: `docker compose up` sozinho semeia o banco com dado sintético e
+# imprime o que rodar em seguida (ver scripts/seed_demo.py) -- diferente do
+# projeto original, que abria com a exploração da API real da Garmin
+# (explore/inspect_garmin.py, não faz parte desta demo).
+CMD ["python", "-m", "scripts.seed_demo"]

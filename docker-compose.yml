@@ -1,0 +1,52 @@
+services:
+  # Banco local, no lugar do Neon (Postgres gerenciado) do projeto original --
+  # a demo não pode depender de um banco na nuvem com dado de outra pessoa.
+  # Mesmo schema.sql, aplicado automaticamente por src/db.py na primeira
+  # conexão -- nada a rodar manualmente aqui.
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: garmin_demo
+      POSTGRES_PASSWORD: garmin_demo
+      POSTGRES_DB: garmin_demo
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432" # opcional -- só pra inspecionar o banco de fora (psql/DBeaver), a app usa o hostname "db"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U garmin_demo"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Modelo de LLM local -- gera o plano de treino de verdade (não mockado),
+  # sem conta nem custo. Depois do primeiro `docker compose up`, baixe um
+  # modelo (ver README, uns 2-5GB): docker compose exec ollama ollama pull
+  # <modelo>. Sem GPU (padrão no Docker Desktop Windows/Mac), roda em CPU --
+  # mais lento, ver README/docs/DEMO.md.
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama_data:/root/.ollama
+    ports:
+      - "11434:11434" # opcional -- debug/ver o modelo baixado de fora
+
+  garmin:
+    build: .
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    depends_on:
+      db:
+        condition: service_healthy
+      ollama:
+        condition: service_started
+    # stdin_open + tty: sem isso o input() travaria caso GARMIN_MOCK seja
+    # desligado sem token/senha configurados -- ver src/extract/garmin.py.
+    stdin_open: true
+    tty: true
+
+volumes:
+  db_data:
+  ollama_data:
