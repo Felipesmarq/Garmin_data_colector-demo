@@ -276,7 +276,7 @@ def main() -> None:
         "\n[seed] pronto. Próximos passos:\n"
         "  docker compose run --rm garmin python -m src.load.planilha_desempenho   # dashboard na planilha\n"
         "  docker compose run --rm garmin python -m src.analyze.analisar_com_ia    # gera o plano da semana\n"
-        "Ver README.md / docs/DEMO.md pra mais detalhes."
+        "Ver README.md pra mais detalhes."
     )
 
 

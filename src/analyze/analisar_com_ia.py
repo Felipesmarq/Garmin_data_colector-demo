@@ -3,9 +3,8 @@
 `gerar_analise(prompt) -> texto` é a única função que fala com o provedor de
 LLM -- o provedor em si (mock/ollama/gemini, ver LLM_PROVEDOR no .env) é
 decidido em src/llm/obter_provedor(), então trocar de provedor nunca exige
-mudar guardrail, prompt ou lógica de revisão daqui (ver CASE_DO_PROJETO_1.md
-seção 4 pro racional original -- esta é a versão da demo pública, ver
-docs/DEMO.md).
+mudar guardrail, prompt ou lógica de revisão daqui -- esta é a versão da
+demo pública do projeto, ver README.md pro que é real e o que é mockado.
 
 Dois guardrails (seção 6.1) não dependem do modelo "perceber" risco
 sozinho -- ambos calculados em Python e injetados como instrução
