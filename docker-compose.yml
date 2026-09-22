@@ -23,7 +23,7 @@ services:
   # sem conta nem custo. Depois do primeiro `docker compose up`, baixe um
   # modelo (ver README, uns 2-5GB): docker compose exec ollama ollama pull
   # <modelo>. Sem GPU (padrão no Docker Desktop Windows/Mac), roda em CPU --
-  # mais lento, ver README/docs/DEMO.md.
+  # mais lento, ver README.md.
   ollama:
     image: ollama/ollama:latest
     volumes:
