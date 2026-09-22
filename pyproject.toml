@@ -1,0 +1,18 @@
+[project]
+name = "garmin-data-colector-demo"
+version = "0.1.0"
+description = "Demo pública do pipeline Garmin -> recomendação de treino com IA (dados sintéticos, LLM local via Ollama)"
+requires-python = ">=3.12"
+dependencies = [
+    "garminconnect>=0.3.6",
+    "python-dotenv>=1.0.0",
+    "psycopg[binary]>=3.1",
+    "gspread>=6.0",
+    "google-auth>=2.30",
+    "google-genai>=1.0",
+    "httpx>=0.28",
+    "tzdata>=2024.1",
+]
+
+[tool.uv]
+package = false

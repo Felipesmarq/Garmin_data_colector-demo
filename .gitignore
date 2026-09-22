@@ -1,0 +1,12 @@
+# Credenciais reais que você mesmo configurar por cima das de demo
+.env
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Config local de skills do Claude Code -- não é parte do projeto
+.claude/
+skills-lock.json
