@@ -113,14 +113,17 @@ conta descartável, criada só pra esta demo (não é a conta pessoal de
 ninguém):
 
 - **Planilha:** [abrir no Google Sheets](https://docs.google.com/spreadsheets/d/10dS1PLu66De5rJxoi7SdHQD4nEcRJAc49ybxa2mBrmI/edit).
-  A chave da conta de serviço (projeto `garmin-demo`) já está neste
-  repositório, em [`.google_sheets_credentials.json`](.google_sheets_credentials.json)
-  -- é onde o `.env.example` já aponta, não precisa mexer.
+  A chave da conta de serviço (projeto `garmin-demo`) **não está neste
+  repositório**: o GitHub bloqueia o push de chaves de service account e o
+  Google desativa as que vazam em repositório público. O autor envia o
+  arquivo `.google_sheets_credentials.json` por fora -- salve-o na
+  **raiz do projeto** (é onde o `.env.example` já aponta, e o `.gitignore`
+  já o ignora).
 - **E-mail:** conta Gmail de teste `t52650125@gmail.com`, com uma senha de
   app (não é a senha da conta).
 
-Falta só colar estas três linhas no seu `.env` local (depois de
-`cp .env.example .env`):
+Com o `.google_sheets_credentials.json` na raiz, falta só colar estas
+três linhas no seu `.env` local (depois de `cp .env.example .env`):
 
 ```
 GOOGLE_SHEET_ID=10dS1PLu66De5rJxoi7SdHQD4nEcRJAc49ybxa2mBrmI
@@ -132,16 +135,21 @@ O plano da semana chega por e-mail na própria conta de teste (sem
 `EMAIL_DESTINATARIO`, o destinatário é o remetente); pra receber na sua
 caixa, defina `EMAIL_DESTINATARIO=seu@email.com` no `.env`.
 
-**Não precisa criar conta em lugar nenhum** pra rodar esta demo. Como
-estas credenciais são públicas, qualquer pessoa pode editar essa planilha
-ou usar essa conta pra enviar e-mail: tratam-se de recursos descartáveis,
-sem nenhum dado real, e podem ser revogados a qualquer momento. Se algo
-parar de funcionar (planilha apagada, senha de app revogada), use as suas
-próprias credenciais: Google Cloud -> ativar a Sheets API -> criar uma
-conta de serviço e baixar a chave JSON (substitui
-`.google_sheets_credentials.json`) -> compartilhar a sua planilha com o
-`client_email` da conta; e, no Gmail, gerar uma senha de app em
-myaccount.google.com/apppasswords.
+**Não precisa criar conta em lugar nenhum** pra rodar esta demo. O ID da
+planilha e a senha de app acima são públicos: qualquer pessoa pode usar
+essa conta pra enviar e-mail, e são recursos descartáveis, sem nenhum
+dado real, que podem ser revogados a qualquer momento.
+
+Sem o `.google_sheets_credentials.json`, os comandos que usam a planilha
+(`planilha_desempenho`, `load_dor`, `analisar_com_ia`) falham com
+`FileNotFoundError` -- o `docker compose up` e o seed funcionam normalmente
+sem ele. Se preferir não esperar o arquivo, ou se algo parar de funcionar
+(planilha apagada, senha de app revogada), use as suas próprias
+credenciais: Google Cloud -> ativar a Sheets API -> criar uma conta de
+serviço e baixar a chave JSON (salve como `.google_sheets_credentials.json`
+na raiz) -> compartilhar a sua planilha com o `client_email` da conta, e
+colocar o ID dela em `GOOGLE_SHEET_ID`; e, no Gmail, gerar uma senha de app
+em myaccount.google.com/apppasswords.
 
 ## Estrutura do projeto
 
