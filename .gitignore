@@ -10,3 +10,10 @@ venv/
 # Config local de skills do Claude Code -- não é parte do projeto
 .claude/
 skills-lock.json
+
+# Chave da service account (Google Cloud) e token da Garmin: o GitHub
+# bloqueia o push de chave de service account (Push Protection) e o Google
+# desativa chaves vazadas em repositório público -- entregue o arquivo por
+# fora (ver README) e coloque na raiz do projeto.
+.google_sheets_credentials.json
+.garmin_tokens/
